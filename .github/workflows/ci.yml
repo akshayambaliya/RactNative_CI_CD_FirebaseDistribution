@@ -58,11 +58,9 @@ jobs:
             --release-notes "$notes" \
             --groups "$firebaseGroups" \
             --token "$firebaseToken"
-      - name: Slack notification
+      - name: Slack Notification
+        uses: rtCamp/action-slack-notify@v2
         env:
+          SLACK_COLOR: ${{ job.status }} # or a specific color like 'green' or '#ff00ff'
+          SLACK_MESSAGE: 'Post Content :rocket:'
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-          SLACK_USERNAME: 'ThisIsMyUsername' # Optional. (defaults to webhook app)
-          SLACK_CHANNEL: '#test' # Optional. (defaults to webhook)
-        uses: Ilshidur/action-slack@2.0.2
-        with:
-          args: 'A new commit has been pushed.' # Optional
