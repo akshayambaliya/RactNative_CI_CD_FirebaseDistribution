@@ -58,3 +58,11 @@ jobs:
             --release-notes "$notes" \
             --groups "$firebaseGroups" \
             --token "$firebaseToken"
+      - name: Slack notification
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+          SLACK_USERNAME: ThisIsMyUsername # Optional. (defaults to webhook app)
+          SLACK_CHANNEL: test # Optional. (defaults to webhook)
+        uses: Ilshidur/action-slack@2.0.2
+        with:
+          args: 'A new commit has been pushed.' # Optional
